@@ -17,9 +17,9 @@ class BaseModel:
     if getenv("HBNB_TYPE_STORAGE") == 'db':
         id = Column(String(60), unique=True, nullable=False, primary_key=True)
         created_at = Column(DateTime, nullable=False,
-                default=datetime.utcnow())
+                            default=datetime.utcnow())
         updated_at = Column(DateTime, nullable=False,
-                default=datetime.utcnow())
+                            default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
@@ -30,7 +30,7 @@ class BaseModel:
             self.created_at = datetime.now()
         else:
             kwargs["created_at"] = datetime.strptime(kwargs["created_at"],
-                                                    "%Y-%m-%dT%H:%M:%S.%f")
+                                                     "%Y-%m-%dT%H:%M:%S.%f")
         if 'updated_at' not in kwargs:
             self.updated_at = datetime.now()
         else:
