@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship
 from os import getenv
 
 
-class Place(BaseModel):
+class Place(BaseModel, Base):
     """ A place to stay """
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
