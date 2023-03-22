@@ -6,7 +6,7 @@ Database storage class
 from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models.base_model import Base
+from models.base_model import Base, BaseModel
 from models.state import State
 from models.user import User
 from models.place import Place
@@ -33,7 +33,7 @@ class DBStorage():
                                                     getenv('HBNB_MYSQL_HOST'),
                                                     getenv('HBNB_MYSQL_DB')),
                                       pool_pre_ping=True)
-        if getenv('HBNB_ENV') is 'test':
+        if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
