@@ -1,7 +1,11 @@
 #!/usr/bin/python3
 """ Console Module """
 import cmd
+import json
+import shlex
 import sys
+from models.engine.file_storage import FileStorage
+from models.engine.db_storage import DBStorage
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -115,16 +119,21 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
-        if not args:
+        if len(args) == 0:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        try:
+            args = shlex.split(args)
+            my_class = args[0]
+            args = args[1:]
+            args = {a.partition('=')[0]: a.partition('=')[2].replace('_', ' ')
+                    for a in args}
+            obj = eval(my_class)(**args)
+            obj.save()
+            print(obj.id)
+
+        except:
             print("** class doesn't exist **")
-            return
-        new_instance = HBNBCommand.classes[args]()
-        storage.save()
-        print(new_instance.id)
-        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
