@@ -46,6 +46,22 @@ class test_basemodel(unittest.TestCase):
         copy.update({1: 2})
         with self.assertRaises(TypeError):
             new = BaseModel(**copy)
+    def test_ids_differ(self):
+        '''
+            Checks that the ids between two instances are different.
+        '''
+        new_model = BaseModel()
+        self.assertNotEqual(new_model.id, self.my_model.id)
+
+    def test_a_updated_created_equal(self):
+        '''
+            Checks that both dates are equal.
+        '''
+        self.assertEqual(self.my_model.updated_at.year,
+                         self.my_model.created_at.year)
+
+    @unittest.skipIf(getenv('HBNB_TYPE_STORAGE') == 'db',
+                     'In database engine, BaseModel is never saved')
 
     def test_save(self):
         """ Testing save """
