@@ -8,7 +8,13 @@ sudo apt-get -y install nginx
 sudo mkdir -p /data/web_static/releases/test /data/web_static/shared
 
 #Create a fake HTML file /data/web_static/releases/test/index.html (with simple content, to test your Nginx configuration)
-echo "Holberton School" |  sudo tee /data/web_static/releases/test/index.html
+echo "<html>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>" |  sudo tee /data/web_static/releases/test/index.html
 
 #Create a symbolic link /data/web_static/current linked to the /data/web_static/releases/test/ folder
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
