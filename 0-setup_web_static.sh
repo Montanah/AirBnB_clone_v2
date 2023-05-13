@@ -17,28 +17,24 @@ sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -hR ubuntu:ubuntu /data/
 
 #Update the Nginx configuration to serve the content of /data/web_static/current/ to hbnb_static
-echo "server {
-		listen 80 default_server;
-		listen [::]:80 default_server;
-		
-		http-request add_header X-Served-By $HOSTNAME;
-		root   /var/www/html;
-		index  index.html index.htm;
-		
-		location https://iomititi.tech/hbnb_static {
+sudo printf %s "server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    add_header X-Served-By $HOSTNAME;
+    root   /var/www/html;
+    index  index.html index.htm;
+    location https://iomititi.tech/hbnb_static {
         alias /data/web_static/current;
-        index index.html;
-		}
-		
-		location /redirect_me {
-        rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
-		}
-		
-		error_page 404 /404.html;
-		location /404 {
-		root /var/www/html;
-		internal;
-		}
+        index index.html index.htm;
+    }
+    location /redirect_me {
+        return 301 http://cuberule.com/;
+    }
+    error_page 404 /404.html;
+    location /404 {
+      root /var/www/html;
+      internal;
+    }
 }" |sudo tee /etc/nginx/sites-available/default
 
 #restart Nginx after updating the configuration
