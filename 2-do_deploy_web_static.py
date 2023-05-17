@@ -7,7 +7,7 @@ web_static folder of your AirBnB Clone repo, using the function do_pack
 from datetime import datetime
 from fabric.operations import local, put, run, env
 
-env.hosts = ['35.229.102.255', '35.231.130.210']
+env.hosts = ['52.86.37.113', '3.83.227.64']
 env.user = 'ubuntu'
 
 
