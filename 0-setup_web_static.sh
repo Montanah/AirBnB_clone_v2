@@ -34,12 +34,10 @@ echo "server {
 		location / {
                 try_files $uri $uri/ =404;
         }
-		
-		location https://iomititi.tech/hbnb_static {
-        alias /data/web_static/current;
-        index index.html index.htm;
-		}
-		
+
+		location /hbnb_static {
+                alias /data/web_static/current/;
+				
 		location /redirect_me {
 			rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
 		}
