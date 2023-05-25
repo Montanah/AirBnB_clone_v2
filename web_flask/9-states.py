@@ -38,11 +38,12 @@ def one_state(id=None):
     my_cities = [city for city in all_cities if city.state_id == my_state.id]
     return render_template('9-states.html', state=my_state, cities=my_cities)
 
-@app.teardown_appcontext
 
+@app.teardown_appcontext
 def close_storage(error):
     ''' closes storage '''
     storage.close()
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
