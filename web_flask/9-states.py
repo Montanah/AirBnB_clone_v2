@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-'''
-a script that starts a Flask web app
-'''
+''' a script that starts a Flask web app '''
 
 from models import storage
 from models.state import State
@@ -38,10 +36,10 @@ def one_state(id=None):
     except Exception:
         return render_template('9-states.html', state=None, cities=None)
     my_cities = [city for city in all_cities if city.state_id == my_state.id]
-    return render_template('9-states.html', state=my_state, cities=my_cities)@app.teardown_appcontext
-
+    return render_template('9-states.html', state=my_state, cities=my_cities)
 
 @app.teardown_appcontext
+
 def close_storage(error):
     ''' closes storage '''
     storage.close()
