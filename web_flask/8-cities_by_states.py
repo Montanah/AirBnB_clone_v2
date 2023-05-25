@@ -11,18 +11,14 @@ app = Flask(__name__)
 
 @app.route('/states_list', strict_slashes=False)
 def states():
-    '''
-        returns an HTML list of states
-    '''
+    ''' returns an HTML list of states '''
     all_states = list(storage.all('State').values())
     return render_template('7-states_list.html', all_states=all_states)
 
 
 @app.route('/cities_by_states', strict_slashes=False)
 def cities():
-    '''
-        returns an HTML list of states with cities inside each state
-    '''
+    ''' returns an HTML list of states with cities inside each state '''
     all_states = list(storage.all('State').values())
     all_cities = list(storage.all('City').values())
     states_cities = ({state:
@@ -35,9 +31,7 @@ def cities():
 
 @app.teardown_appcontext
 def close_storage(error):
-    '''
-        closes storage
-    '''
+    ''' closes storage '''
     storage.close()
 
 if __name__ == '__main__':

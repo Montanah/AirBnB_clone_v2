@@ -13,9 +13,7 @@ app = Flask(__name__)
 
 @app.route('/cities_by_states', strict_slashes=False)
 def cities():
-    '''
-        returns an HTML list of states with cities inside each state
-    '''
+    ''' returns an HTML list of states with cities inside each state '''
     all_states = list(storage.all('State').values())
     all_cities = list(storage.all('City').values())
     states_cities = ({state:
@@ -29,9 +27,7 @@ def cities():
 @app.route('/states', strict_slashes=False)
 @app.route('/states/<id>', strict_slashes=False)
 def one_state(id=None):
-    '''
-        returns a HTML list of cities in a single state
-    '''
+    ''' returns a HTML list of cities in a single state '''
     if id is None:
         all_states = list(storage.all('State').values())
         return render_template('7-states_list.html', all_states=all_states)
@@ -39,16 +35,15 @@ def one_state(id=None):
     all_cities = list(storage.all('City').values())
     try:
         my_state = all_states['State.{}'.format(id)]
-    except:
+    except Exception:
         return render_template('9-states.html', state=None, cities=None)
     my_cities = [city for city in all_cities if city.state_id == my_state.id]
     return render_template('9-states.html', state=my_state, cities=my_cities)@app.teardown_appcontext
 
 
+@app.teardown_appcontext
 def close_storage(error):
-    '''
-        closes storage
-    '''
+    ''' closes storage '''
     storage.close()
 
 if __name__ == '__main__':
