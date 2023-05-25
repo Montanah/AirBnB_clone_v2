@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-'''
-a script that starts a Flask web app
-'''
+''' a script that starts a Flask web app '''
 
 from models import storage
 from models.state import State
