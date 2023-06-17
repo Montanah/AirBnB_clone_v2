@@ -3,18 +3,18 @@
 a script that starts a Flask web app
 '''
 
-from flask import Flask, render_template
+from flask import Flask
 
 
 app = Flask("__name__")
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/airbnb-onepage/', strict_slashes=False)
 def hello():
     '''
         tests basic flask app
     '''
-    return render_template("5-number.html")
+    return "Hello World"
 
 
 if __name__ == '__main__':
